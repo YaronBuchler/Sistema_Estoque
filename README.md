@@ -26,7 +26,7 @@ Sistema desenvolvido para gerenciamento de produtos, fornecedores, clientes e mo
 | RF02 | Controle de funcionários | Controle | O sistema deve permitir a alteração dos dados dos funcionários | `Gerente+` | 🔴 Alta |
 | RF03 | Cadastro de produto | Cadastro | O sistema deve permitir o cadastro de novos produtos | `Funcionário+` | 🔴 Alta |
 | RF04 | Controle de produtos | Controle | O sistema deve permitir a alteração dos dados dos produtos. A alteração de preço é restrita a Gerentes e Chefe. | `Funcionário+` (dados) / `Gerente+` (preço) | 🔴 Alta |
-| RF05 | Registro de compras | Operação | O sistema deve registrar as compras realizadas | `Funcionário+` | 🔴 Alta |
+| RF05 | Registro de compras | Operação | O sistema deve registrar as compras realizadas | `Gerente+` | 🔴 Alta |
 | RF06 | Registro de vendas | Operação | O sistema deve registrar as vendas realizadas | `Funcionário+` | 🔴 Alta |
 | RF07 | Consulta de inventário | Consulta | O sistema deve permitir a consulta do inventário | `Funcionário+` | 🔴 Alta |
 | RF08 | Controle de compras | Controle | O sistema deve vincular compras a funcionários e fornecedores | `Funcionário+` | 🔴 Alta |
