@@ -59,3 +59,6 @@ Sistema desenvolvido para gerenciamento de produtos, fornecedores, clientes e mo
 | RNF10 | Atualização em tempo real | Performance | O estoque deve ser atualizado imediatamente após operações de compra e venda | 🔴 Alta |
 | RNF11 | Controle de acesso por papel | Segurança | O sistema deve restringir funcionalidades sensíveis (cadastro/edição de funcionários e alteração de preços) conforme o papel do usuário | 🔴 Alta |
 
+---
+## Diagrama de Caso de Uso
+<img width="579" height="922" alt="image" src="https://github.com/user-attachments/assets/4177082d-fa07-4bd3-b867-596580200371" />
