@@ -62,3 +62,9 @@ Sistema desenvolvido para gerenciamento de produtos, fornecedores, clientes e mo
 ---
 ## Diagrama de Caso de Uso
 <img width="579" height="922" alt="image" src="https://github.com/user-attachments/assets/4177082d-fa07-4bd3-b867-596580200371" />
+
+---
+## Diagrama de Classes 
+<img width="370" height="734" alt="Captura de tela 2026-04-09 174822" src="https://github.com/user-attachments/assets/28ddc8ce-bda5-4e14-9ba4-4faa45f2079a" />
+
+
