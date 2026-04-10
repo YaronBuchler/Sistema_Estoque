@@ -65,6 +65,7 @@ Sistema desenvolvido para gerenciamento de produtos, fornecedores, clientes e mo
 
 ---
 ## Diagrama de Classes 
-<img width="370" height="734" alt="Captura de tela 2026-04-09 174822" src="https://github.com/user-attachments/assets/28ddc8ce-bda5-4e14-9ba4-4faa45f2079a" />
+<img width="1051" height="742" alt="DiagramaDeClasseGitHUB drawio" src="https://github.com/user-attachments/assets/d9a822aa-7592-4631-bc14-94829b67cd96" />
+
 
 
