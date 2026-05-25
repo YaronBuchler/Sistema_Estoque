@@ -5,15 +5,19 @@ import jakarta.validation.constraints.*;
 import lombok.*;
 
 @Entity
-@Table(name = "fornecedores")
+@Table(name = "categorias")
 @Data
-@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class Fornecedor extends Pessoa {
+public class Categoria {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @NotBlank
     @Column(unique = true)
-    private String cnpj;
+    private String nome;
 
-    private String catalogo;
+    private String descricao;
 }

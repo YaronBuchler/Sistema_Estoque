@@ -6,6 +6,7 @@ import lombok.*;
 @Entity
 @Table(name = "funcionarios")
 @Data
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 public class Funcionario extends Pessoa {

@@ -6,6 +6,7 @@ import lombok.*;
 @Entity
 @Table(name = "donos_estoque")
 @Data
+@EqualsAndHashCode(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
 public class DonoEstoque extends Funcionario {
