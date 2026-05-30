@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
+import com.joao.sistema_estoque.exception.ResourceNotFoundException;
 
 @Service
 @RequiredArgsConstructor
@@ -27,7 +28,7 @@ public class VendaService {
 
     public Venda buscarPorId(Long id) {
         return vendaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Venda não encontrada"));
+                .orElseThrow(() -> new ResourceNotFoundException("Venda não encontrada"));
     }
 
     public List<Venda> listarPorCliente(Long clienteId) {
@@ -43,10 +44,10 @@ public class VendaService {
                                List<Map<String, Object>> itens) {
 
         Cliente cliente = clienteRepository.findById(clienteId)
-                .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException("Cliente não encontrado"));
 
         Funcionario funcionario = funcionarioRepository.findById(funcionarioId)
-                .orElseThrow(() -> new RuntimeException("Funcionário não encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException("Funcionário não encontrado"));
 
         Venda venda = new Venda();
         venda.setCliente(cliente);
@@ -60,7 +61,7 @@ public class VendaService {
             BigDecimal precoUnitario = new BigDecimal(itemData.get("precoUnitario").toString());
 
             Produto produto = produtoRepository.findById(produtoId)
-                    .orElseThrow(() -> new RuntimeException("Produto não encontrado: " + produtoId));
+                    .orElseThrow(() -> new ResourceNotFoundException("Produto não encontrado: " + produtoId));
 
             // Baixa estoque automaticamente
             inventarioService.baixarEstoque(inventarioId, produtoId, quantidade);

@@ -5,6 +5,7 @@ import com.joao.sistema_estoque.repository.ProdutoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import com.joao.sistema_estoque.exception.ResourceNotFoundException;
 
 @Service
 @RequiredArgsConstructor
@@ -18,7 +19,7 @@ public class ProdutoService {
 
     public Produto buscarPorId(Long id) {
         return repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException("Produto não encontrado"));
     }
 
     public List<Produto> listarPorCategoria(Long categoriaId) {

@@ -5,6 +5,7 @@ import com.joao.sistema_estoque.repository.FuncionarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import com.joao.sistema_estoque.exception.ResourceNotFoundException;
 
 @Service
 @RequiredArgsConstructor
@@ -18,7 +19,7 @@ public class FuncionarioService {
 
     public Funcionario buscarPorId(Long id) {
         return repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Funcionário não encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException("Funcionário não encontrado"));
     }
 
     public Funcionario salvar(Funcionario funcionario) {

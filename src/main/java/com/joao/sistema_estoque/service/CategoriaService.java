@@ -5,6 +5,8 @@ import com.joao.sistema_estoque.repository.CategoriaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import com.joao.sistema_estoque.exception.ResourceNotFoundException;
+import com.joao.sistema_estoque.exception.BusinessException;
 
 @Service
 @RequiredArgsConstructor
@@ -18,12 +20,12 @@ public class CategoriaService {
 
     public Categoria buscarPorId(Long id) {
         return repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Categoria não encontrada"));
+                .orElseThrow(() -> new ResourceNotFoundException("Categoria não encontrada"));
     }
 
     public Categoria salvar(Categoria categoria) {
         if (repository.existsByNome(categoria.getNome())) {
-            throw new RuntimeException("Categoria já existe");
+            throw new BusinessException("Categoria já existe");
         }
         return repository.save(categoria);
     }

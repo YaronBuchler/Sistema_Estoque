@@ -9,6 +9,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
+import com.joao.sistema_estoque.exception.ResourceNotFoundException;
+
 
 @Service
 @RequiredArgsConstructor
@@ -27,7 +29,7 @@ public class CompraService {
 
     public Compra buscarPorId(Long id) {
         return compraRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Compra não encontrada"));
+                .orElseThrow(() -> new ResourceNotFoundException("Compra não encontrada"));
     }
 
     public List<Compra> listarPorFornecedor(Long fornecedorId) {
@@ -39,10 +41,10 @@ public class CompraService {
                                  List<Map<String, Object>> itens) {
 
         Fornecedor fornecedor = fornecedorRepository.findById(fornecedorId)
-                .orElseThrow(() -> new RuntimeException("Fornecedor não encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException("Fornecedor não encontrado"));
 
         DonoEstoque dono = donoRepository.findById(donoId)
-                .orElseThrow(() -> new RuntimeException("Dono não encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException("Dono não encontrado"));
 
         Compra compra = new Compra();
         compra.setFornecedor(fornecedor);
@@ -56,7 +58,7 @@ public class CompraService {
             BigDecimal precoUnitario = new BigDecimal(itemData.get("precoUnitario").toString());
 
             Produto produto = produtoRepository.findById(produtoId)
-                    .orElseThrow(() -> new RuntimeException("Produto não encontrado: " + produtoId));
+                    .orElseThrow(() -> new ResourceNotFoundException("Produto não encontrado: " + produtoId));
 
             ItemCompra item = new ItemCompra();
             item.setCompra(compra);

@@ -5,6 +5,8 @@ import com.joao.sistema_estoque.repository.ClienteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import com.joao.sistema_estoque.exception.ResourceNotFoundException;
+
 
 @Service
 @RequiredArgsConstructor
@@ -18,7 +20,7 @@ public class ClienteService {
 
     public Cliente buscarPorId(Long id) {
         return repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException("Cliente não encontrado"));
     }
 
     public Cliente salvar(Cliente cliente) {

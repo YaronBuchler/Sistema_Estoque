@@ -5,6 +5,8 @@ import com.joao.sistema_estoque.repository.FornecedorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import com.joao.sistema_estoque.exception.ResourceNotFoundException;
+import com.joao.sistema_estoque.exception.BusinessException;
 
 @Service
 @RequiredArgsConstructor
@@ -18,12 +20,12 @@ public class FornecedorService {
 
     public Fornecedor buscarPorId(Long id) {
         return repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Fornecedor não encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException("Fornecedor não encontrado"));
     }
 
     public Fornecedor salvar(Fornecedor fornecedor) {
         if (repository.existsByCnpj(fornecedor.getCnpj())) {
-            throw new RuntimeException("CNPJ já cadastrado");
+            throw new BusinessException("CNPJ já cadastrado");
         }
         return repository.save(fornecedor);
     }

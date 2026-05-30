@@ -5,6 +5,7 @@ import com.joao.sistema_estoque.repository.DonoEstoqueRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import com.joao.sistema_estoque.exception.ResourceNotFoundException;
 
 @Service
 @RequiredArgsConstructor
@@ -18,7 +19,7 @@ public class DonoEstoqueService {
 
     public DonoEstoque buscarPorId(Long id) {
         return repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Dono do estoque não encontrado"));
+                .orElseThrow(() -> new ResourceNotFoundException("Dono do estoque não encontrado"));
     }
 
     public DonoEstoque salvar(DonoEstoque dono) {

@@ -1,0 +1,7 @@
+package com.joao.sistema_estoque.exception;
+
+public class ResourceNotFoundException extends RuntimeException {
+    public ResourceNotFoundException(String message) {
+        super(message);
+    }
+}
