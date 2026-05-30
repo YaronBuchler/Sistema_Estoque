@@ -16,14 +16,16 @@ public abstract class Pessoa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @NotBlank(message = "Nome é obrigatório")
     private String nome;
 
-    @Email
+    @Email(message = "Email inválido")
+    @NotBlank(message = "Email é obrigatório")
     private String email;
 
     private String telefone;
 
+    @NotBlank(message = "CPF é obrigatório")
     @Column(unique = true)
     private String cpf;
 }

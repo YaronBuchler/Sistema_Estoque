@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "compras")
@@ -28,6 +29,7 @@ public class Compra {
 
     private LocalDate data;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "compra", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemCompra> itens = new ArrayList<>();
 

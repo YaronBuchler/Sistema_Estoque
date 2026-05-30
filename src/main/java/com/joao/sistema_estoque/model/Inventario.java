@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import java.util.ArrayList;
 import java.util.List;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "inventarios")
@@ -18,6 +19,7 @@ public class Inventario {
 
     private String descricao;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "inventario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemInventario> itens = new ArrayList<>();
 }

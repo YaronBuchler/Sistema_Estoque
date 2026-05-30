@@ -16,13 +16,14 @@ public class Produto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank
+    @NotBlank(message = "Nome do produto é obrigatório")
     private String nome;
+
 
     private String descricao;
 
-    @NotNull
-    @DecimalMin(value = "0.0", inclusive = false)
+    @NotNull(message = "Preço é obrigatório")
+    @DecimalMin(value = "0.01", message = "Preço deve ser maior que zero")
     private BigDecimal preco;
 
     @ManyToOne
