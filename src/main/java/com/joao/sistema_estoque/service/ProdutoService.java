@@ -2,16 +2,23 @@ package com.joao.sistema_estoque.service;
 
 import com.joao.sistema_estoque.model.Produto;
 import com.joao.sistema_estoque.repository.ProdutoRepository;
+import com.joao.sistema_estoque.repository.ItemInventarioRepository;
+import com.joao.sistema_estoque.repository.ItemVendaRepository;
+import com.joao.sistema_estoque.repository.ItemCompraRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import com.joao.sistema_estoque.exception.ResourceNotFoundException;
+import com.joao.sistema_estoque.exception.BusinessException;
 
 @Service
 @RequiredArgsConstructor
 public class ProdutoService {
 
     private final ProdutoRepository repository;
+    private final ItemInventarioRepository itemInventarioRepository;
+    private final ItemVendaRepository itemVendaRepository;
+    private final ItemCompraRepository itemCompraRepository;
 
     public List<Produto> listarTodos() {
         return repository.findAll();
@@ -46,6 +53,15 @@ public class ProdutoService {
 
     public void deletar(Long id) {
         buscarPorId(id);
+        if (!itemInventarioRepository.findByProduto_Id(id).isEmpty()) {
+            throw new BusinessException("Produto está vinculado a um ou mais inventários e não pode ser excluído.");
+        }
+        if (!itemVendaRepository.findByProduto_Id(id).isEmpty()) {
+            throw new BusinessException("Produto está vinculado a uma ou mais vendas e não pode ser excluído.");
+        }
+        if (!itemCompraRepository.findByProduto_Id(id).isEmpty()) {
+            throw new BusinessException("Produto está vinculado a uma ou mais compras e não pode ser excluído.");
+        }
         repository.deleteById(id);
     }
 }

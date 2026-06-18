@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+import com.joao.sistema_estoque.exception.BusinessException;
 
 @RestController
 @RequestMapping("/compras")
@@ -38,10 +39,19 @@ public class CompraController {
 
     @PostMapping
     public ResponseEntity<Compra> realizarCompra(@RequestBody Map<String, Object> body) {
+        if (body.get("fornecedorId") == null || body.get("donoId") == null || body.get("inventarioId") == null) {
+            throw new BusinessException("fornecedorId, donoId e inventarioId são obrigatórios");
+        }
+
+        Object itensObj = body.get("itens");
+        if (itensObj == null) {
+            throw new BusinessException("Itens são obrigatórios");
+        }
+
         Long fornecedorId = Long.valueOf(body.get("fornecedorId").toString());
         Long donoId = Long.valueOf(body.get("donoId").toString());
         Long inventarioId = Long.valueOf(body.get("inventarioId").toString());
-        List<Map<String, Object>> itens = (List<Map<String, Object>>) body.get("itens");
+        List<Map<String, Object>> itens = (List<Map<String, Object>>) itensObj;
 
         return ResponseEntity.ok(service.realizarCompra(fornecedorId, donoId, inventarioId, itens));
     }

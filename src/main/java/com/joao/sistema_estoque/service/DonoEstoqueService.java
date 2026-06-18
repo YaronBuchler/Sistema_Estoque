@@ -2,16 +2,19 @@ package com.joao.sistema_estoque.service;
 
 import com.joao.sistema_estoque.model.DonoEstoque;
 import com.joao.sistema_estoque.repository.DonoEstoqueRepository;
+import com.joao.sistema_estoque.repository.CompraRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import com.joao.sistema_estoque.exception.ResourceNotFoundException;
+import com.joao.sistema_estoque.exception.BusinessException;
 
 @Service
 @RequiredArgsConstructor
 public class DonoEstoqueService {
 
     private final DonoEstoqueRepository repository;
+    private final CompraRepository compraRepository;
 
     public List<DonoEstoque> listarTodos() {
         return repository.findAll();
@@ -41,6 +44,9 @@ public class DonoEstoqueService {
 
     public void deletar(Long id) {
         buscarPorId(id);
+        if (!compraRepository.findByDono_Id(id).isEmpty()) {
+            throw new BusinessException("Dono está vinculado a uma ou mais compras e não pode ser excluído.");
+        }
         repository.deleteById(id);
     }
 }

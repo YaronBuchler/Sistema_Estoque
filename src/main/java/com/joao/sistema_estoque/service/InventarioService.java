@@ -88,4 +88,12 @@ public class InventarioService {
         item.setQuantidade(item.getQuantidade() - quantidade);
         itemInventarioRepository.save(item);
     }
+
+    public void deletar(Long id) {
+        buscarPorId(id);
+        if (!itemInventarioRepository.findByInventario_Id(id).isEmpty()) {
+            throw new BusinessException("Inventário possui itens cadastrados e não pode ser excluído. Remova os itens primeiro.");
+        }
+        inventarioRepository.deleteById(id);
+    }
 }

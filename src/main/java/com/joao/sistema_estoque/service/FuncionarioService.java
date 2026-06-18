@@ -2,16 +2,19 @@ package com.joao.sistema_estoque.service;
 
 import com.joao.sistema_estoque.model.Funcionario;
 import com.joao.sistema_estoque.repository.FuncionarioRepository;
+import com.joao.sistema_estoque.repository.VendaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import com.joao.sistema_estoque.exception.ResourceNotFoundException;
+import com.joao.sistema_estoque.exception.BusinessException;
 
 @Service
 @RequiredArgsConstructor
 public class FuncionarioService {
 
     private final FuncionarioRepository repository;
+    private final VendaRepository vendaRepository;
 
     public List<Funcionario> listarTodos() {
         return repository.findAll();
@@ -39,6 +42,9 @@ public class FuncionarioService {
 
     public void deletar(Long id) {
         buscarPorId(id);
+        if (!vendaRepository.findByFuncionario_Id(id).isEmpty()) {
+            throw new BusinessException("Funcionário está vinculado a uma ou mais vendas e não pode ser excluído.");
+        }
         repository.deleteById(id);
     }
 }

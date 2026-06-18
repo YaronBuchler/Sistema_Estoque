@@ -8,11 +8,14 @@ import java.util.List;
 import com.joao.sistema_estoque.exception.ResourceNotFoundException;
 import com.joao.sistema_estoque.exception.BusinessException;
 
+import com.joao.sistema_estoque.repository.ProdutoRepository;
+
 @Service
 @RequiredArgsConstructor
 public class FornecedorService {
 
     private final FornecedorRepository repository;
+    private final ProdutoRepository produtoRepository;
 
     public List<Fornecedor> listarTodos() {
         return repository.findAll();
@@ -43,6 +46,9 @@ public class FornecedorService {
 
     public void deletar(Long id) {
         buscarPorId(id);
+        if (!produtoRepository.findByFornecedor_Id(id).isEmpty()) {
+            throw new BusinessException("Fornecedor está vinculado a um ou mais produtos e não pode ser excluído.");
+        }
         repository.deleteById(id);
     }
 }

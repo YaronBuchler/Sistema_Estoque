@@ -77,6 +77,7 @@ public class VendaService {
         return vendaRepository.save(venda);
     }
 
+    @Transactional(readOnly = true)
     public BigDecimal calcularTotal(Long vendaId) {
         return buscarPorId(vendaId).calcularTotal();
     }
